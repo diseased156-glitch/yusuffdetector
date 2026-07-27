@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: lol-match-detector
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: RIOT_API_KEY
+        sync: false
+      - key: MONITORED_RIOT_IDS
+        sync: false
+      - key: RIOT_PLATFORM
+        value: eun1
+      - key: RIOT_REGION
+        value: europe
+      - key: CHECK_INTERVAL
+        value: "30"
